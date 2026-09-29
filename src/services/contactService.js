@@ -1,10 +1,11 @@
 const apiBaseUrl = (import.meta.env.VITE_CONTACT_API_URL || '').replace(/\/$/, '')
+const contactApiUrl = apiBaseUrl ? `${apiBaseUrl}/api/contact` : '/api/contact'
 
 export async function submitContactMessage(payload) {
   let response
 
   try {
-    response = await fetch(`${apiBaseUrl}/api/contact`, {
+    response = await fetch(contactApiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(payload),

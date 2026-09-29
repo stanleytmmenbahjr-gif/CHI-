@@ -1,5 +1,30 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "app": {
+      "root": ".",
+      "framework": "vite"
+    },
+    "chi-contact-api": {
+      "root": "backend",
+      "framework": "express",
+      "buildCommand": "npm ci",
+      "installCommand": "npm ci",
+      "startCommand": "npm start"
+    }
+  },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "chi-contact-api"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "app"
+      }
+    }
   ]
 }
