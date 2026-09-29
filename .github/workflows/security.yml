@@ -1,0 +1,68 @@
+name: Security and quality checks
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '23 8 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  audit-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            backend/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Install API dependencies
+        run: npm ci --prefix backend
+
+      - name: Audit frontend dependencies
+        run: npm audit --audit-level=high
+
+      - name: Audit API dependencies
+        run: npm --prefix backend audit --audit-level=high
+
+      - name: Test API validation and security behavior
+        run: npm --prefix backend test
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Scan repository for secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  codeql:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          queries: security-extended
+
+      - name: Analyze JavaScript and TypeScript
+        uses: github/codeql-action/analyze@v3

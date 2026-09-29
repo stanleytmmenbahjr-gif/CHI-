@@ -1,0 +1,16 @@
+.contact-form .field label>span[aria-hidden=true],.contact-required-note>span{color:var(--coral)}
+.optional-label{margin-left:6px;color:#8a7e87;font-size:10px;font-weight:400}
+.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{border-color:var(--berry);outline:3px solid #8b1e6b24;outline-offset:1px}
+.contact-form textarea{min-height:150px}
+.contact-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.contact-feedback{margin:18px 0 0;padding:13px 15px;border-radius:4px;font-size:13px;line-height:1.6}
+.contact-feedback-success{color:#1f5d3a;border:1px solid #b9dfc7;background:#eef9f1}
+.contact-feedback-error{color:#8b2530;border:1px solid #f0c3c7;background:#fff1f2}
+.contact-submit:disabled{cursor:wait;opacity:.72;transform:none}
+.contact-spinner{width:15px;height:15px;border:2px solid #ffffff70;border-top-color:white;border-radius:50%;animation:contact-spin .7s linear infinite}
+.contact-required-note{margin:12px 0 0;color:#766b74;font-size:10px}
+@keyframes contact-spin{to{transform:rotate(360deg)}}
+html.dark .contact-form .field input,html.dark .contact-form .field textarea,html.dark .contact-form .field select{color:#fff4fa;border-color:#594954;background:#221b23}
+html.dark .contact-form .field label,html.dark .contact-required-note{color:#d7cbd4}
+html.dark .contact-feedback-success{color:#b8ebc7;border-color:#3b6549;background:#203326}
+html.dark .contact-feedback-error{color:#ffc4c9;border-color:#7d4147;background:#382326}
