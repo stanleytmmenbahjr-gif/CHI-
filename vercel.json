@@ -9,8 +9,7 @@
       "root": "backend",
       "framework": "express",
       "buildCommand": "npm ci",
-      "installCommand": "npm ci",
-      "startCommand": "npm start"
+      "installCommand": "npm ci"
     }
   },
   "rewrites": [
