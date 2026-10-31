@@ -1,11 +1,11 @@
 # Security Audit Report
 
-Audit date: 2026-09-29  
+Audit date: 2026-10-31
 Scope: Vue 3/Vite public website, Express contact API, Resend integration, repository configuration, and production dependencies. This is a source/configuration review plus automated checks, not a penetration test or infrastructure certification.
 
 ## Summary
 
-**Security score: 82/100, conditional on credential rotation and production Redis setup.** No exploitable dependency advisory at or above high severity was reported by the npm audit checks run for this review. The application now has request validation, HTML escaping for email output, strict origin allowlists, rate limiting, request-size limits, security headers, compressed responses, structured redacted logging, and automated security checks.
+**Security score: 82/100, conditional on credential rotation and production Redis setup.** Fresh `npm audit --audit-level=high` checks for the frontend and backend report zero vulnerabilities after dependency updates. The application has request validation, HTML escaping for email output, strict origin allowlists, rate limiting, request-size limits, security headers, compressed responses, structured redacted logging, and automated security checks.
 
 Production rate limiting requires a shared Redis service. Production startup intentionally fails if Redis, allowed frontend origins, or email settings are missing. The score is conditional because Redis and deployment origins still need to be configured in Render, and a Resend key was previously exposed in local tooling output.
 

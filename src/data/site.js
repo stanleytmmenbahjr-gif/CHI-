@@ -56,20 +56,53 @@ export const team = [
   { name: 'Josiah S. Garteh', role: 'Bong County Coordinator', bio: 'Coordinates Count Her In activities in Bong County.', image: photos.teamJosiah },
 ]
 
-export const gallery = [
-  { image: media('Gallery 2.jpg'), label: 'Count Her In community outreach', category: 'Community Outreach' },
-  { image: media('Gallery 3.jpg'), label: 'Girls learning together', category: 'Workshops' },
-  { image: media('Gallery 4.jpg'), label: 'Peer educator training', category: 'Training' },
-  { image: media('Gallery 5.jpg'), label: 'A day of shared learning', category: 'Workshops' },
-  { image: media('Gallery 6.jpg'), label: 'Young leaders in action', category: 'Leadership Events' },
-  { image: media('Gallery 7.jpg'), label: 'Community voices in action', category: 'Community Outreach' },
-  { image: media('Gallery 8.jpg'), label: 'Girls building confidence', category: 'Training' },
-  { image: media('Gallery 9.jpg'), label: 'Learning and growing', category: 'Workshops' },
-  { image: media('Gallery 10.jpg'), label: 'Count Her In community gathering', category: 'Community Outreach' },
-  { image: media('Gallery 11.jpg'), label: 'Young women leading', category: 'Leadership Events' },
-  { image: media('Gallery 12.jpg'), label: 'Girls sharing ideas', category: 'Workshops' },
-  { image: media('Gallery 13.jpg'), label: 'Community learning in action', category: 'Training' },
+const mediaFiles = Object.keys(import.meta.glob('/public/Media/*', { eager: true, import: 'default' })).map((path) => path.split('/').pop())
+
+const formatGalleryLabel = (filename) => {
+  const baseName = filename.replace(/\.[^/.]+$/, '').trim()
+  if (!baseName) return 'Community photo'
+
+  return baseName
+    .replace(/\bawarness\b/gi, 'Awareness')
+    .replace(/\bcapcity\b/gi, 'Capacity')
+    .replace(/\bcommuinty\b/gi, 'Community')
+    .replace(/\bdialouge\b/gi, 'Dialogue')
+    .replace(/\bmenstural\b/gi, 'Menstrual')
+    .replace(/\bpartnership\b/gi, 'Partnership')
+    .replace(/\s+/g, ' ')
+    .replace(/\b\w/g, (letter) => letter.toUpperCase())
+}
+
+const describeGalleryCategory = (filename) => {
+  const value = filename.toLowerCase()
+
+  if (value.includes('gallery') || value.includes('community') || value.includes('outreach')) return 'Community Outreach'
+  if (value.includes('training') || value.includes('capacity') || value.includes('awarness') || value.includes('health') || value.includes('education') || value.includes('engagement') || value.includes('dialogue') || value.includes('mentorship')) return 'Training'
+  if (value.includes('voice') || value.includes('climate') || value.includes('lead') || value.includes('team') || value.includes('hero') || value.includes('progress')) return 'Leadership Events'
+
+  return 'Workshops'
+}
+
+const excludedGalleryFiles = [
+  'Abiola Beyflan Public Relations Officer.jpeg',
+  'Augustus Jozzie Fahnbulleh Excutive Director.jpeg',
+  'Cyrus K Wea Jr.jpeg',
+  'Felecia Paye Finance officer.jpeg',
+  'Focus Sonah Bong County Coordinator.jpeg',
+  'Henell.jpeg',
+  'Josiah S Garteh Bong County Coordinator.jpeg',
+  'Mai Wiakanty-Partnership & Mobilization.jpeg',
+  'Stanley T M Menbah Jr Program Officer.jpeg',
+  'Timothy Patrick Koon Communication Officer.jpeg',
 ]
+
+export const gallery = mediaFiles
+  .filter((filename) => !['logo.jpg', ...excludedGalleryFiles].includes(filename))
+  .map((filename, index) => ({
+    image: media(filename),
+    label: formatGalleryLabel(filename) || `Community photo ${index + 1}`,
+    category: describeGalleryCategory(filename),
+  }))
 
 export { media }
 

@@ -20,7 +20,7 @@ function subscribe() {
             <img class="brand-logo" :src="photos.logo" alt="Count Her In" loading="lazy" decoding="async" />
           </RouterLink>
           <p>Empowering adolescent girls and young women to shape a more just, hopeful future for Liberia.</p>
-          <div class="footer-socials"><a href="https://instagram.com" aria-label="Instagram"><ArrowUpRight :size="16" /></a><a href="https://facebook.com" aria-label="Facebook"><span aria-hidden="true">f</span></a><a href="https://linkedin.com" aria-label="LinkedIn"><span aria-hidden="true">in</span></a></div>
+          <div class="footer-socials"><a href="https://wa.me/231555877347" aria-label="WhatsApp" target="_blank" rel="noreferrer">WA</a><a href="https://web.facebook.com/profile.php?id=61561626041242" aria-label="Messenger" target="_blank" rel="noreferrer">M</a><a href="https://instagram.com" aria-label="Instagram"><ArrowUpRight :size="16" /></a><a href="https://facebook.com" aria-label="Facebook"><span aria-hidden="true">f</span></a><a href="https://linkedin.com" aria-label="LinkedIn"><span aria-hidden="true">in</span></a></div>
         </div>
         <div>
           <h2 class="footer-heading">Explore</h2>
@@ -37,7 +37,7 @@ function subscribe() {
           <p v-if="subscribed" class="newsletter-success" role="status">Thank you for joining our community.</p>
         </div>
       </div>
-      <div class="footer-bottom"><span>© {{ new Date().getFullYear() }} Count Her In Liberia. Every girl counts.</span><span class="footer-contact"><span><MapPin :size="13" /> Monrovia, Liberia</span><span><Mail :size="13" /> countherin2023@gmail.com</span><span><Phone :size="13" /> +231 88 093 5662</span></span></div>
+      <div class="footer-bottom"><span>© {{ new Date().getFullYear() }} Count Her In Liberia. Every girl counts.</span><span>Build and design by <a href="https://wa.me/231555877347" target="_blank" rel="noreferrer">Stanley T M Menbah Jr</a></span><span class="footer-contact"><span><MapPin :size="13" /> Monrovia, Liberia</span><span><Mail :size="13" /> countherin2023@gmail.com</span><span><Phone :size="13" /> +231 88 093 5662</span></span></div>
     </div>
   </footer>
 </template>

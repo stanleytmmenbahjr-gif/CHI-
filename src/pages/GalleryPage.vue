@@ -2,7 +2,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { ArrowLeft, ArrowRight, X } from '@lucide/vue'
-import { photos, gallery } from '../data/site'
+import { media, photos, gallery } from '../data/site'
 
 const categories = ['All moments', 'Workshops', 'Community Outreach', 'Training', 'Leadership Events']
 const active = ref('All moments')
@@ -67,8 +67,8 @@ onBeforeUnmount(() => {
 
 <template>
   <div>
-    <section class="page-hero"><img :src="gallery[0].image" alt="Count Her In team members in the community" loading="eager" fetchpriority="high" decoding="async" /><div class="container page-hero-content"><span class="eyebrow">Moments from our work</span><h1 class="display">The gallery.</h1><p>Small moments, shared work, and the people creating change across Liberia.</p><div class="breadcrumb"><RouterLink to="/">Home</RouterLink><span>/</span><span>Gallery</span></div></div></section>
-    <section class="section" v-reveal><div class="container"><div class="gallery-filters" role="group" aria-label="Filter gallery"><button v-for="category in categories" :key="category" type="button" class="filter-button" :class="{ active: active === category }" :aria-pressed="active === category" @click="active = category; lightboxIndex = -1">{{ category }}</button></div><TransitionGroup name="gallery-filter" tag="div" class="gallery-page-grid"><article v-for="(item, index) in filtered" :key="item.label" class="gallery-page-item" role="button" tabindex="0" :aria-label="`Open photo: ${item.label}`" @click="openLightbox(index)" @keydown.enter.prevent="openLightbox(index)" @keydown.space.prevent="openLightbox(index)"><img :src="item.image" :alt="item.label" loading="lazy" decoding="async" /><span>{{ item.label }} · {{ item.category }}</span></article></TransitionGroup></div></section>
+    <section class="page-hero"><img :src="media('capcity building 1.jpg')" alt="Count Her In capacity building session" loading="eager" fetchpriority="high" decoding="async" /><div class="container page-hero-content"><span class="eyebrow">Moments from our work</span><h1 class="display">The gallery.</h1><p>Small moments, shared work, and the people creating change across Liberia.</p><div class="breadcrumb"><RouterLink to="/">Home</RouterLink><span>/</span><span>Gallery</span></div></div></section>
+    <section class="section" v-reveal><div class="container"><div class="gallery-filters" role="group" aria-label="Filter gallery"><button v-for="category in categories" :key="category" type="button" class="filter-button" :class="{ active: active === category }" :aria-pressed="active === category" @click="active = category; lightboxIndex = -1">{{ category }}</button></div><TransitionGroup name="gallery-filter" tag="div" class="gallery-page-grid"><article v-for="(item, index) in filtered" :key="item.label" class="gallery-page-item" role="button" tabindex="0" :aria-label="`Open photo: ${item.label}`" @click="openLightbox(index)" @keydown.enter.prevent="openLightbox(index)" @keydown.space.prevent="openLightbox(index)"><img :src="item.image" :alt="item.label" loading="lazy" decoding="async" /></article></TransitionGroup></div></section>
     <Teleport to="body">
       <Transition name="gallery-lightbox">
         <div v-if="lightboxItem" class="gallery-lightbox" @click.self="closeLightbox" @touchstart.passive="onTouchStart" @touchend.passive="onTouchEnd">
