@@ -7,7 +7,7 @@ Scope: Vue 3/Vite public website, Express contact API, Resend integration, repos
 
 **Security score: 82/100, conditional on credential rotation and production Redis setup.** Fresh `npm audit --audit-level=high` checks for the frontend and backend report zero vulnerabilities after dependency updates. The application has request validation, HTML escaping for email output, strict origin allowlists, rate limiting, request-size limits, security headers, compressed responses, structured redacted logging, and automated security checks.
 
-Production rate limiting requires a shared Redis service. Production startup intentionally fails if Redis, allowed frontend origins, or email settings are missing. The score is conditional because Redis and deployment origins still need to be configured in Render, and a Resend key was previously exposed in local tooling output.
+Production rate limiting requires a shared Redis service. Production startup intentionally fails if Redis, allowed frontend origins, or email settings are missing. The score is conditional because Redis and deployment origins still need to be configured in Render, and a Resend key was previously exposed in local tooling output. Static frontend deployments now set a Content Security Policy and browser security headers through both Netlify and Vercel configuration.
 
 ## Findings and Fixes
 
@@ -26,7 +26,7 @@ Production rate limiting requires a shared Redis service. Production startup int
 - **A02 Cryptographic failures:** Secrets remain server-side. Use HTTPS at the hosting edge, keep the Resend key in Render secrets, and rotate the previously exposed key.
 - **A03 Injection:** Zod validates and normalizes inputs. User-controlled values are HTML-escaped in HTML emails; email subject category is an enum.
 - **A04 Insecure design:** Contact abuse is mitigated with a honeypot, a per-IP rate limit, a strict payload cap, and a minimal public API surface.
-- **A05 Security misconfiguration:** Helmet, explicit CORS, production environment validation, disabled `X-Powered-By`, no-store API responses, and safe JSON errors are configured.
+- **A05 Security misconfiguration:** Helmet, explicit CORS, production environment validation, disabled `X-Powered-By`, no-store API responses, safe JSON errors, and static-host CSP/security headers are configured.
 - **A06 Vulnerable components:** The audit run found zero high-severity production dependency advisories. CI rechecks dependencies on pushes, pull requests, and a weekly schedule.
 - **A07 Identification/authentication failures:** The public contact endpoint has no account authentication and receives no session cookies; rate limiting is applied because it is an unauthenticated email-sending action.
 - **A08 Software/data integrity failures:** Build, tests, CodeQL, dependency review via npm audit, and secret scanning run in GitHub Actions. Protect the default branch and review dependency updates.
