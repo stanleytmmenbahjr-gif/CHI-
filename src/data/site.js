@@ -46,10 +46,10 @@ export const programs = [
 export const team = [
   { name: 'Cyrus K. Wea Jr.', role: 'Founder', bio: 'Contributes to Count Her In’s work with young people and communities.', image: photos.teamCyrus },
   { name: 'Augustus Jozzie Fahnbulleh', role: 'Executive Director', bio: 'Leads Count Her In’s work and organizational direction.', image: photos.teamAugustus },
-  { name: 'Felecia Paye', role: 'Finance Officer', bio: 'Supports the financial operations behind CHI’s programs and activities.', image: photos.teamFelecia },
+  { name: 'Felecial paye', role: 'Finance Officer', bio: 'Supports the financial operations behind CHI’s programs and activities.', image: photos.teamFelecia },
   { name: 'Mai Wiakanty', role: 'Partnership & Mobilization', bio: 'Supports Count Her In’s partnership and mobilization work.', image: photos.teamMai },
   { name: 'Focus Sonah', role: 'Bong County Coordinator', bio: 'Coordinates Count Her In activities in Bong County.', image: photos.teamFocus },
-  { name: 'Henell', role: 'Team Member', bio: 'Contributes to Count Her In’s work with young people and communities.', image: photos.teamHenell },
+  { name: 'Henell Dayepaye', role: 'Team Member', bio: 'Contributes to Count Her In’s work with young people and communities.', image: photos.teamHenell },
   { name: 'Stanley T. M. Menbah Jr.', role: 'Program Officer', bio: 'Supports the delivery of CHI programs with young people and communities.', image: photos.teamStanley },
   { name: 'Abiola Beyflan', role: 'Public Relations Officer', bio: 'Shares the organization’s work and connects its stories with wider audiences.', image: photos.teamAbiola },
   { name: 'Timothy Patrick Koon', role: 'Communication Officer', bio: 'Supports communications and shares Count Her In’s work with wider audiences.', image: photos.teamTimothy },
@@ -63,6 +63,7 @@ const formatGalleryLabel = (filename) => {
   if (!baseName) return 'Community photo'
 
   return baseName
+    .replace(/\bvideo\b/gi, 'Community video')
     .replace(/\bawarness\b/gi, 'Awareness')
     .replace(/\bcapcity\b/gi, 'Capacity')
     .replace(/\bcommuinty\b/gi, 'Community')
@@ -100,6 +101,7 @@ export const gallery = mediaFiles
   .filter((filename) => !['logo.jpg', ...excludedGalleryFiles].includes(filename))
   .map((filename, index) => ({
     image: media(filename),
+    type: /\.(mp4|webm|mov|m4v|ogv)$/i.test(filename) ? 'video' : 'image',
     label: formatGalleryLabel(filename) || `Community photo ${index + 1}`,
     category: describeGalleryCategory(filename),
   }))

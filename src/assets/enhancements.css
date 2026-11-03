@@ -39,6 +39,7 @@ html.dark .footer{background:#171219}
 .nav-actions .button{border-radius:3px;box-shadow:0 5px 16px #8b1e6b20}
 .brand-logo{width:68px;height:68px;margin-block:-5px}
 .gallery-page-item img{aspect-ratio:4/3;min-height:0}
+.gallery-page-item video{width:100%;aspect-ratio:4/3;min-height:0;display:block;object-fit:cover;background:#201820}
 .hero-image{opacity:0;transform:scale(1.035);transition:opacity 1.5s cubic-bezier(.22,.61,.36,1),transform 5s cubic-bezier(.2,.65,.3,1);will-change:opacity,transform}
 .hero-image.active{opacity:1;transform:scale(1)}
 .hero-crossfade-leave-active{z-index:1}

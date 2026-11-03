@@ -42,6 +42,7 @@
 .gallery-lightbox-dialog{position:relative;width:min(1120px,100%);max-height:calc(100dvh - 48px);display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:18px;outline:none}
 .gallery-lightbox-figure{grid-column:2;grid-row:1;min-width:0;max-height:calc(100dvh - 64px);display:grid;justify-items:center;gap:12px;margin:0}
 .gallery-lightbox-figure img{max-width:100%;max-height:calc(100dvh - 120px);object-fit:contain;border-radius:6px}
+.gallery-lightbox-figure video{max-width:100%;max-height:calc(100dvh - 120px);border-radius:6px;background:#100d10}
 .gallery-lightbox-figure figcaption{color:white;font-size:12px;text-align:center}
 .gallery-lightbox-nav,.gallery-lightbox-close{width:42px;height:42px;display:grid;place-items:center;color:white;border:1px solid #ffffff60;border-radius:50%;background:#ffffff14;backdrop-filter:blur(8px);cursor:pointer;transition:background-color .18s ease,border-color .18s ease,transform .18s ease}
 .gallery-lightbox-nav:hover,.gallery-lightbox-close:hover{border-color:white;background:#ffffff2a}
